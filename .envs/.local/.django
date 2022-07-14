@@ -1,0 +1,10 @@
+# General
+# ------------------------------------------------------------------------------
+DEBUG=True
+SECRET_KEY=!!SECRETKEYHERE!!
+
+DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost,project.localhost
+
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
