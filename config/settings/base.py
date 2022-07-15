@@ -314,5 +314,7 @@ COMPONENTS = {
     "libraries": [
         "hypercomponents.components",
     ],
+    "autodiscovery": False,
+    "template_cache_size": 256,
 }
 #EndRegion

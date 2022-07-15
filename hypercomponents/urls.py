@@ -3,7 +3,9 @@ from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
-    re_path(r"^django_components/$", views.base_for_django_components, name="base_for_django_components"),
+    re_path(r"^django_components/demo_calendar/$", views.demo_calendar, name="demo_calendar"),
+    re_path(r"^django_components/demo_calendar_slots/$", views.demo_calendar_slots, name="demo_calendar_slots"),
+    re_path(r"^django_components/demo_calendar_slots_with_super/$", views.demo_calendar_slots_with_super, name="demo_calendar_slots_with_super"),
     # re_path(r"^v32_vqp/example_handsontable", views.v32_vqp_example_handsontable, name="v32_vqp_example_handsontable"),
     # re_path(r"^v32_vqp/product_packages/create/$", views.product_package_create_get, name="product_packages-create"),
     # re_path(r"^v32_vqp/product_packages/(?P<pk>\d+)/delete/$", views.product_package_delete, name="product_packages-delete"),

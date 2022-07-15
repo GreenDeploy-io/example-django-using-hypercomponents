@@ -1,0 +1,14 @@
+{% load component_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My example calendar</title>
+    {% component_css_dependencies %}
+</head>
+<body>
+    {% component_block "calendar_slots" date="2020-06-06" %}
+        {% slot "body" %}{{ slot.super }}. Have a great day!{% endslot %}
+    {% endcomponent_block %}
+    {% component_js_dependencies %}
+</body>
+<html>
