@@ -30,6 +30,7 @@ services:
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
+      - ./.envs/.local/.github
     # replaced by env_file
     # environment:
     #   - POSTGRES_NAME=postgres

@@ -26,13 +26,28 @@ defusedxml==0.7.1
     # via python3-openid
 deprecated==1.2.13
     # via redis
+dj-database-url @ git+https://github.com/jazzband/dj-database-url@v1.0.0
+    # via -r base.in
 django==3.2.14
     # via
     #   -r base.in
+    #   dj-database-url
     #   django-allauth
+    #   django-browser-reload
+    #   django-components
+    #   django-tailwind
+    #   heroicons
 django-allauth==0.49.0
     # via -r base.in
+django-browser-reload==1.6.0
+    # via django-tailwind
+django-components==0.20
+    # via -r base.in
 django-environ==0.9.0
+    # via -r base.in
+django-tailwind==3.3.0
+    # via -r base.in
+heroicons[django]==1.8.0
     # via -r base.in
 idna==3.3
     # via requests

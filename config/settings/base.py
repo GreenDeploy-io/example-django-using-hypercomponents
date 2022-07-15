@@ -8,19 +8,22 @@ Then this is in the format of base, local, and production.py under settings.py
 
 https://greendeploy.io/en/3.2/concepts/settings/
 """
+
 # inspired by https://github.com/cookiecutter/cookiecutter-django/blob/master/%7B%7Bcookiecutter.project_slug%7D%7D/config/settings/base.py
 import os
+import sys
 from pathlib import Path
 
+import dj_database_url
 import environ
+from django.db.utils import DatabaseError
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # project/
 APPS_DIR = ROOT_DIR / "project"
 env = environ.Env()
 
-READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
-if READ_DOT_ENV_FILE:
+if READ_DOT_ENV_FILE := env.bool("DJANGO_READ_DOT_ENV_FILE", default=False):
     # OS environment variables take precedence over variables from .env
     env.read_env(str(ROOT_DIR / ".env"))
 
@@ -72,10 +75,15 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "django_components",
+    'tailwind',
+    'theme',
+    'django_browser_reload',
 ]
 
 LOCAL_APPS = [
     "project.users",
+    "hypercomponents",
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -130,6 +138,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     # "reversion.middleware.RevisionMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     # "core.middleware.RequestDomainMiddleware",
     # "last_active.middleware.LastActiveMiddleware",
 ]
@@ -159,7 +168,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [str(APPS_DIR / "templates")],
-        "APP_DIRS": True,
+        # "APP_DIRS": True, # remove because of django_components
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -168,10 +177,35 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
-            # "builtins": ["pattern_library.loader_tags"],
+            'loaders':[(
+                'django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                    'django_components.template_loader.Loader',
+                ]
+            )],
+            "builtins": [
+                # "pattern_library.loader_tags"
+                'django_components.templatetags.component_tags',
+            ],
         },
     },
 ]
+
+#Region - Database
+DOESNOT_NEED_DATABASE_URL = ["collectstatic", "tailwind", ]
+NEED_DATABASE_URL = sys.argv[1] not in DOESNOT_NEED_DATABASE_URL
+
+# how to debug
+# use `print(sys.argv)` which should show you `python manage.py ...`
+
+if len(sys.argv) > 1 and NEED_DATABASE_URL:
+    if os.getenv("DATABASE_URL", None) is None:
+        raise DatabaseError("DATABASE_URL environment variable not defined")
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    }
+#EndRegion - Database
 
 # SECURITY
 # ------------------------------------------------------------------------------
@@ -202,10 +236,6 @@ ADMIN_URL = "admin/"
 ADMINS = [("""KimSia Sim""", "kimsia@oppoin.com")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
-
-# Assume Postgres settings in .envs/.local/.postgres or .envs/.production/.postgres
-# and relies on BASE_DIR/docker/production/django/entrypoint to build DATABASE_URL
-DATABASES = {"default": env.db("DATABASE_URL")}
 
 # CACHES = {
 #     # Read os.environ['CACHE_URL'] and raises
@@ -271,3 +301,18 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+#Region - django-tailwind
+TAILWIND_APP_NAME = 'theme'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+#EndRegion
+
+#Region - django-components
+COMPONENTS = {
+    "libraries": [
+        "hypercomponents.components",
+    ],
+}
+#EndRegion

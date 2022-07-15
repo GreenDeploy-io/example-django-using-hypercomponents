@@ -1,0 +1,12 @@
+{% load component_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My example calendar</title>
+    {% component_css_dependencies %}
+</head>
+<body>
+    {% component "calendar" date="2015-06-19" %}
+    {% component_js_dependencies %}
+</body>
+<html>

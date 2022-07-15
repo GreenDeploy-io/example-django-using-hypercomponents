@@ -3,7 +3,7 @@
 DEBUG=True
 SECRET_KEY=!!SECRETKEYHERE!!
 
-DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost,project.localhost
+DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost,hypercomponents-example.localhost
 
 # Redis
 # ------------------------------------------------------------------------------
