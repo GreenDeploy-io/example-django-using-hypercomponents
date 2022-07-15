@@ -1,0 +1,18 @@
+{% load component_tags %}
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Demo Basic Example in Tagify</title>
+      {% include "tagify/00_basic/css-cdn.html" %}
+  </head>
+  <body>
+    {% include "tagify/00_basic/tagify.html" %}
+    {% include "tagify/00_basic/js-cdn.html" %}
+    {% component_js_dependencies %}
+    <script>
+      window.addEventListener('load', function () {
+        {% include "tagify/00_basic/tagify.js" %}
+      });
+    </script>
+  </body>
+<html>

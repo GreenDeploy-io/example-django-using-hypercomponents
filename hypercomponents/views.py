@@ -11,4 +11,7 @@ def demo_calendar_slots(request):
 def demo_calendar_slots_with_super(request):
     return render(request, 'django_components/demo_calendar_slots_with_super.html')
 
+def tagify_demo_00_basic(request):
+    return render(request, 'tagify/demo_00_basic.html')
+
 

@@ -7,7 +7,7 @@ class Calendar(component.Component):
     Note that Django will look for templates inside `[your app]/components` dir
     To customize which template to use based on context override get_template_name instead
     """
-    template_name = "calendar/calendar.html"
+    template_name = "django_components/00_calendar/calendar.html"
 
 
     def get_context_data(self, date):
@@ -22,8 +22,8 @@ class Calendar(component.Component):
         """
         Media class is used to define the css and js files that will be used in the template
         """
-        css = 'hypercomponents/templates/components/calendar/calendar.css'
-        js = 'hypercomponents/templates/components/calendar/calendar.js'
+        css = 'hypercomponents/templates/components/django_components/00_calendar/calendar.css'
+        js = 'hypercomponents/templates/components/django_components/00_calendar/calendar.js'
 
 @component.register("calendar_slots")
 class CalendarSlots(component.Component):
