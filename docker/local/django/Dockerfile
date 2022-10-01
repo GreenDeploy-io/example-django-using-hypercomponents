@@ -6,7 +6,7 @@
 # docker-compose -f local.yml run --rm --service-ports django  on one terminal
 # then in another go and run docker exec -it <docker-container-id> bash
 # another useful one https://www.digitalocean.com/community/tutorials/how-to-use-docker-exec-to-run-commands-in-a-docker-container#conclusion
-FROM ubuntu:focal-20220426
+FROM ubuntu:focal-20220826
 # because ubuntu-focal uses python3 for latest python3.9 and pip3
 
 ENV PYTHONDONTWRITEBYTECODE 1
