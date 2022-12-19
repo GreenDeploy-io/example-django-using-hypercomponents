@@ -40,7 +40,7 @@ redis==4.3.4  # 2022 Jun https://github.com/redis/redis-py
 
 #Region - Django Components
 # ----------------------------------------------------------------
-django-components==0.20  # 2022 Jul https://pypi.org/project/django-components/0.20/
+django-components==0.23  # 2022 Jul https://pypi.org/project/django-components/0.20/
 
 # Tailwind
 # ------------------------------------------------------------------------------
