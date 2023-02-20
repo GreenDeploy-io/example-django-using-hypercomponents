@@ -44,5 +44,5 @@ django-components==0.20  # 2022 Jul https://pypi.org/project/django-components/0
 
 # Tailwind
 # ------------------------------------------------------------------------------
-django-tailwind==3.3.0 # 2022 Jun https://pypi.org/project/django-tailwind/3.3.0/
+django-tailwind==3.5.0 # 2022 Jun https://pypi.org/project/django-tailwind/3.3.0/
 heroicons[django]==1.8.0 # 2022 Jun https://pypi.org/project/heroicons/1.8.0/
